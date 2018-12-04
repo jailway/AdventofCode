@@ -11,8 +11,8 @@ for index, row in data.iterrows():
             fabric[x][y] += 1
 
 cnt = 0
-for x in range(0, 999):
-    for y in range(0,999):
+for x in range(0, 1000):
+    for y in range(0,1000):
         if fabric [y][x] >=2: cnt+=1
 
 print('answer to star 1 is ' + str(cnt))
