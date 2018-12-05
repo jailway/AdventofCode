@@ -6,11 +6,11 @@ def load_data():
 data = list(load_data())
 
 i = 0
-while i < len(data) - 2:
+while i < len(data) - 1:
     if abs(ord(data[i]) - ord(data[i+1])) == 32:
         data.pop(i+1)
         data.pop(i)
-        i -= 1
+        i = max(i-1, 0)
     else:
         i += 1
 
