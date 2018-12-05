@@ -1,7 +1,8 @@
 def load_data():
     """
     Loads data from input file
-    :return:
+
+    :return: Polymer read as string
     """
     with open('05_input.txt', 'r') as f:
         return f.read().strip()
@@ -10,8 +11,12 @@ def load_data():
 def collapse(polymer: str) -> str:
     """
     Collapses polymer string as per instruction on Day 5
+
     :param polymer: Input polymer as a string
     :return: Colapsed polymer string according to rules
+    >>> collapse('dabAcCaCBAcCcaDA')
+    'dabCBAcaDA'
+
     """
     test = list(polymer)
     i = 0
@@ -28,6 +33,7 @@ def collapse(polymer: str) -> str:
 def leave_out(polymer: str) -> dict:
     """
     Tests leaving out individual letters in aplphabet on polymer string input, and collapsing it
+
     :param polymer: Input polymer as a string
     :return: Dictionary containing results pairs (Input Letter):(Length of reduced polymer)
     """
