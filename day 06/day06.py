@@ -68,8 +68,8 @@ def grid_of_closest(coords: [(int, int)]):
     """
     boundary = get_boundary(coords)
     grid = {}
-    for x in range(boundary[0][0], boundary[1][0]+1):
-        for y in range(boundary[0][1], boundary[1][1]+1):
+    for x in range(boundary[0][0], boundary[1][0] + 1):
+        for y in range(boundary[0][1], boundary[1][1] + 1):
             grid[(x, y)] = get_closest(coords, (x, y))
     return grid
 
@@ -86,8 +86,8 @@ def largest_area_size(grid: dict):
     ignored = set()
     ignored.add(-1)
 
-    for x in range(boundary[0][0], boundary[1][0]+1):
-        for y in range(boundary[0][1], boundary[1][1]+1):
+    for x in range(boundary[0][0], boundary[1][0] + 1):
+        for y in range(boundary[0][1], boundary[1][1] + 1):
 
             if x == boundary[0][0] or x == boundary[1][0] or y == boundary[0][1] or y == boundary[1][1]:
                 ignored.add(grid[(x, y)])
@@ -106,6 +106,25 @@ def largest_area_size(grid: dict):
     return largest_size
 
 
+def count_low_distance(coords: [(int, int)], distance_limit: int) -> int:
+    """
+    Counts the number of points with a total distance to coordinates lower than a limit
+
+    :param coords: Coordinates list
+    :param distance_limit: A distance limit
+    :return: Number of coordinates with a total distance lower than a limit
+    """
+    boundary = get_boundary(coords)
+    low_distance_count = 0
+
+    for x in range(boundary[0][0], boundary[1][0] + 1):
+        for y in range(boundary[0][1], boundary[1][1] + 1):
+            if sum([distance((x, y), c) for c in coords]) < distance_limit:
+                low_distance_count += 1
+    return low_distance_count
+
+
 if __name__ == "__main__":
     coords = load_data()
-    print(largest_area_size(grid_of_closest(coords)))
+    print('Answer to Star 1 is: ', largest_area_size(grid_of_closest(coords)))
+    print('Answer to Star 2 is: ', count_low_distance(coords, 10000))
