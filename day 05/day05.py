@@ -50,3 +50,4 @@ if __name__ == "__main__":
 
     tst = leave_out(data)
     print('Answer to star 2 is: ', min(tst.values()), ' on letter: ', min(tst, key=tst.get))
+
