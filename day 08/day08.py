@@ -28,7 +28,34 @@ def read_metadata(input: [int], position: int = 0) -> (int, [int]):
     return length, metadata
 
 
+def read_values(input: [int], position: int = 0) -> (int, int):
+    """
+    Reads values recursively
+
+    :param input: input list of nodes
+    :param position: starting position in the list (default 0)
+    :return: tuple (length of the node, value of node)
+    """
+    metalength = input[position + 1]
+    length = 2
+    subnodes = input[position]
+    if subnodes == 0:
+        return length + metalength, sum(input[position + length:position + length + metalength])
+    subnodesvalues = []
+    for i in range(0, subnodes):
+        l, v = read_values(input, position + length)
+        length += l
+        subnodesvalues.append(v)
+    value = 0
+    for i in input[position + length:position + length + metalength]:
+        if i > 0 and i <= subnodes:
+            value += subnodesvalues[i - 1]
+    return length + metalength, value
+
+
 if __name__ == "__main__":
     data = load_data('08_input.txt')
     x = read_metadata(data)
-    print(sum(x[1]))
+    print("The answer to star 1 is: ", sum(x[1]))
+    v = read_values(data)
+    print("The answer to star 2 is: ", v[1])
